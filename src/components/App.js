@@ -13,8 +13,9 @@ function App() {
       <Header></Header>
       <Switch>
         <Route path="/" exact component={HomePage}></Route>
-        <Route path="/courses" component={CoursesPage}></Route>
         <Route path="/about" component={AboutPage}></Route>
+        <Route path="/course/:id" component={CoursePage}></Route>
+        <Route path="/courses" component={CoursesPage}></Route>
         <Route component={PageNotFound}></Route>
       </Switch>
     </div>

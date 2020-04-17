@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getCourses } from '../api/courseApi';
 import CoursePage from './CoursePage';
+import { Link } from 'react-router-dom';
 
 function CoursesPage(props) {
   const [courses, setCourses] = useState([]);
@@ -30,7 +31,7 @@ function renderRow(course) {
   return (
     <tr key={course.id}>
       <td>
-        <a href={'/courses/' + course.id}>{course.title}</a>
+        <Link to={'/course/' + course.id}>{course.title}</Link>
       </td>
       <td>{course.authorId}</td>
       <td>{course.category}</td>
