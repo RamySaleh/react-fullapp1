@@ -4,6 +4,7 @@ import CourseForm from './CourseForm';
 import { toast } from 'react-toastify';
 
 const CoursePage = (props) => {
+  const [errors, setErrors] = useState({});
   const [course, setCourse] = useState({
     id: null,
     title: '',
@@ -22,11 +23,22 @@ const CoursePage = (props) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('handle submit');
+    if (!formIsValid()) return;
     saveCourse(course).then(() => {
       toast.success('course saved');
       props.history.push('/courses');
     });
+
+    function formIsValid() {
+      const _errors = {};
+
+      if (!course.title) _errors.title = 'Title is required';
+      if (!course.authorId) _errors.authorId = 'Author is required';
+      if (!course.category) _errors.category = 'Category is required';
+
+      setErrors(_errors);
+      return Object.keys(_errors).length === 0;
+    }
   }
 
   return (
@@ -34,6 +46,7 @@ const CoursePage = (props) => {
       <h2>Manage Course</h2>
       <CourseForm
         course={course}
+        errors={errors}
         onChange={handleChange}
         onSubmit={handleSubmit}
       ></CourseForm>

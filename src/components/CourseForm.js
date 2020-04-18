@@ -8,6 +8,7 @@ function CourseForm(props) {
         id="title"
         name="title"
         label="Title"
+        error={props.errors.title}
         onChange={props.onChange}
         value={props.course.title}
       />
@@ -35,6 +36,7 @@ function CourseForm(props) {
         name="category"
         label="Category"
         onChange={props.onChange}
+        error={props.errors.category}
         value={props.course.category}
       />
 
