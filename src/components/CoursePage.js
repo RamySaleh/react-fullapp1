@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { getCourseById } from '../api/courseApi';
+import { getCourseById, saveCourse } from '../api/courseApi';
 import CourseForm from './CourseForm';
-import { Prompt } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const CoursePage = (props) => {
   const [course, setCourse] = useState({
@@ -16,16 +16,27 @@ const CoursePage = (props) => {
   }, []);
 
   function handleChange(event) {
-    // { ...course, title: event.target.value };
     const updateCourse = { ...course, [event.target.name]: event.target.value };
     setCourse(updateCourse);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log('handle submit');
+    saveCourse(course).then(() => {
+      console.log('saved');
+      props.history.push('/courses');
+    });
   }
 
   return (
     <>
       <h2>Manage Course</h2>
-      <CourseForm course={course} onDataChange={handleChange}></CourseForm>
-      {/* <Prompt when={true} message="Where are you going maaan?"></Prompt> */}
+      <CourseForm
+        course={course}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      ></CourseForm>
     </>
   );
 };
