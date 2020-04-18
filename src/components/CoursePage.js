@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { saveCourse } from '../api/courseApi';
+import { getCourseById, saveCourse } from '../api/courseApi';
 import CourseForm from './CourseForm';
 import { toast } from 'react-toastify';
 
@@ -13,8 +13,11 @@ const CoursePage = (props) => {
     category: '',
   });
   useEffect(() => {
-    //getCourseById(props.match.params.id).then((_course) => setCourse(_course));
-  }, []);
+    const courseId = props.match.params.id;
+    if (courseId) {
+      getCourseById(courseId).then((_course) => setCourse(_course));
+    }
+  }, [props.match.params.id]);
 
   function handleChange(event) {
     const updateCourse = { ...course, [event.target.name]: event.target.value };
