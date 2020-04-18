@@ -21,21 +21,24 @@ function CoursesPage(props) {
             <th>Category</th>
           </tr>
         </thead>
-        <tbody>{courses.map(renderRow)}</tbody>
+        <tbody>
+          {courses.map((course) => {
+            return (
+              <tr key={course.id}>
+                <td>
+                  <Link to={'/course/' + course.id}>{course.title}</Link>
+                </td>
+                <td>{course.authorId}</td>
+                <td>{course.category}</td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
+      <Link className="btn btn-primary" to="/course">
+        Add
+      </Link>
     </>
-  );
-}
-
-function renderRow(course) {
-  return (
-    <tr key={course.id}>
-      <td>
-        <Link to={'/course/' + course.id}>{course.title}</Link>
-      </td>
-      <td>{course.authorId}</td>
-      <td>{course.category}</td>
-    </tr>
   );
 }
 
