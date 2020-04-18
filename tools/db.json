@@ -72,35 +72,11 @@
     },
     {
       "id": 11,
-      "title": "Fun",
-      "slug": "fun",
-      "authorId": 4,
-      "category": "React",
-      "createdAt": 1587213477452
-    },
-    {
-      "id": 12,
-      "title": "f",
-      "slug": "f",
-      "authorId": 4,
-      "category": "s",
-      "createdAt": 1587213750802
-    },
-    {
-      "id": 13,
       "title": "fun",
       "slug": "fun",
       "authorId": 4,
-      "category": "js",
-      "createdAt": 1587213798001
-    },
-    {
-      "id": 14,
-      "title": "tit",
-      "slug": "tit",
-      "authorId": 1,
       "category": "React",
-      "createdAt": 1587213926989
+      "createdAt": 1587214289080
     }
   ],
   "authors": [

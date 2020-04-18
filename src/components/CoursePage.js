@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { getCourseById, saveCourse } from '../api/courseApi';
+import { saveCourse } from '../api/courseApi';
 import CourseForm from './CourseForm';
-import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const CoursePage = (props) => {
   const [course, setCourse] = useState({
@@ -24,7 +24,7 @@ const CoursePage = (props) => {
     event.preventDefault();
     console.log('handle submit');
     saveCourse(course).then(() => {
-      console.log('saved');
+      toast.success('course saved');
       props.history.push('/courses');
     });
   }
