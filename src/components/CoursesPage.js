@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { getCourses } from '../api/courseApi';
-import CoursePage from './CoursePage';
+import courseStore from '../stores/courseStore';
 import { Link } from 'react-router-dom';
+import { getCourses } from '../actions/courseActions';
 
 function CoursesPage(props) {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(courseStore.getCourses());
 
   useEffect(() => {
-    getCourses().then((_courses) => setCourses(_courses));
+    courseStore.addChangeListner(onChange);
+    if (courseStore.getCourses().length === 0) {
+      getCourses();
+    }
+    // whatever you return will be used on unmount (cleaning after)
+    return () => courseStore.removeChangeListener(onChange);
   }, []);
 
+  function onChange() {
+    setCourses(courseStore.getCourses());
+  }
   return (
     <>
       <h2>Courses</h2>

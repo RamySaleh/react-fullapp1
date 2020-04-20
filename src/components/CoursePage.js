@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getCourseById, saveCourse } from '../api/courseApi';
 import CourseForm from './CourseForm';
+import courseStore from '../stores/courseStore';
 import { toast } from 'react-toastify';
+import * as courseActions from '../actions/courseActions';
 
 const CoursePage = (props) => {
   const [errors, setErrors] = useState({});
@@ -15,7 +16,7 @@ const CoursePage = (props) => {
   useEffect(() => {
     const courseId = props.match.params.id;
     if (courseId) {
-      getCourseById(courseId).then((_course) => setCourse(_course));
+      setCourse(courseStore.getCourseById(parseInt(courseId)));
     }
   }, [props.match.params.id]);
 
@@ -27,7 +28,7 @@ const CoursePage = (props) => {
   function handleSubmit(event) {
     event.preventDefault();
     if (!formIsValid()) return;
-    saveCourse(course).then(() => {
+    courseActions.saveCourse(course).then(() => {
       toast.success('course saved');
       props.history.push('/courses');
     });

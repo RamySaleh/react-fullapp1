@@ -1,0 +1,4 @@
+export default {
+  CREATE_COURSE: 'CREATE_COURSE',
+  GET_COURSES: 'GET_COURSES',
+};
